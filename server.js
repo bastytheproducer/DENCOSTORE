@@ -10,7 +10,7 @@ app.use(express.json({ strict: false, reviver: (key, value) => value }));
 app.use(express.urlencoded({ extended: true }));
 
 const accountSid = 'AC8b888b02f9970ef8bc905c406e1fdfbb';
-const authToken = '0caa779080ec1a038d326dfd0630d090';
+const authToken = '6f7bfea1c63513f7fe0a776a70f880dd';
 const client = twilio(accountSid, authToken);
 
 app.post('/send-sms', (req, res) => {
