@@ -65,8 +65,7 @@
             .then(response => {
                 if (response.ok) {
                     alert('Compra procesada. SMS enviado.');
-                    // Redirect to Transbank (placeholder)
-                    window.location.href = 'https://www.transbank.cl'; // Replace with actual link
+                    // No redirect to payment platform, just confirm SMS sent
                 } else {
                     alert('Error enviando SMS.');
                 }
