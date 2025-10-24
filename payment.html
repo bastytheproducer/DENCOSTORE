@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago - DENCO STORE</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Portal de Pago</h1>
+    </header>
+
+    <section>
+        <h2>Detalles de la Compra</h2>
+        <p>Juego: <span id="game-title"></span></p>
+        <p>Precio: <span id="game-price"></span></p>
+    </section>
+
+    <section>
+        <h2>Datos de Envío</h2>
+        <form id="shipping-form">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" required><br>
+
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" required><br>
+
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br>
+
+            <button type="submit">Proceder al Pago</button>
+        </form>
+    </section>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('game-title').textContent = urlParams.get('title');
+        document.getElementById('game-price').textContent = urlParams.get('price');
+
+        document.getElementById('shipping-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const game = urlParams.get('title');
+            const price = urlParams.get('price');
+
+            // Enviar SMS con todos los datos
+            const message = `${name} compró ${price} en ${game}. Dirección: ${address}. Tel: ${phone}. Email: ${email}`;
+            fetch('http://localhost:3000/send-sms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    to: '+56941656899',
+                    message: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Compra procesada. SMS enviado.');
+                    // Redirect to Transbank (placeholder)
+                    window.location.href = 'https://www.transbank.cl'; // Replace with actual link
+                } else {
+                    alert('Error enviando SMS.');
+                }
+                return response.text();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error conectando al servidor.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "denco-store",
+  "version": "1.0.0",
+  "description": "Backend for DENCO STORE SMS integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "twilio": "^4.19.0",
+    "cors": "^2.8.5"
+  }
+}
