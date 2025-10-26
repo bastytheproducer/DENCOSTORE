@@ -9,10 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('.'));
 
-// Serve static files from the current directory
-app.use(express.static('.'));
-
-// Content Security Policy middleware
+// Bypass CSP to allow unsafe-eval
 app.use((req, res, next) => {
     res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';");
     next();
