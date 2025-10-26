@@ -21,16 +21,16 @@
         <h2>Datos de Envío</h2>
         <form id="shipping-form">
             <label for="name">Nombre:</label>
-            <input type="text" id="name" required><br>
+            <input type="text" id="name" autocomplete="name" required><br>
 
             <label for="address">Dirección:</label>
-            <input type="text" id="address" required><br>
+            <input type="text" id="address" autocomplete="address-line1" required><br>
 
             <label for="phone">Teléfono:</label>
-            <input type="tel" id="phone" required><br>
+            <input type="tel" id="phone" autocomplete="tel" required><br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" required><br>
+            <input type="email" id="email" autocomplete="email" required><br>
 
             <button type="submit">Enviar SMS con los Datos Ingresados</button>
         </form>
