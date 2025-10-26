@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('.'));
 
 // Serve static files from the current directory
 app.use(express.static('.'));
@@ -26,20 +27,9 @@ app.post('/send-sms', (req, res) => {
     if (!to || !message) {
         return res.status(400).send('Missing to or message');
     }
-    client.messages
-        .create({
-            body: message,
-            messagingServiceSid: 'MG96d389e2a561c9266894d185b73ab0ee',
-            to: to
-        })
-        .then(message => {
-            console.log('SMS enviado:', message.sid);
-            res.status(200).send('SMS enviado');
-        })
-        .catch(error => {
-            console.error('Error enviando SMS:', error.message);
-            res.status(500).send('Error enviando SMS: ' + error.message);
-        });
+    // Simulate SMS sending for testing without actual Twilio credentials
+    console.log('Simulated SMS to:', to, 'Message:', message);
+    res.status(200).send('SMS enviado (simulado)');
 });
 
 app.listen(3000, '0.0.0.0', () => {
