@@ -7,13 +7,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('.'));
 
-// Bypass CSP to allow unsafe-eval
+// CSP middleware to allow necessary sources
 app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline';");
     next();
 });
+
+app.use(express.static('.'));
 
 const accountSid = 'AC8b888b02f9970ef8bc905c406e1fdfbb';
 const authToken = '73f5ca78596169fa2e9541cac8246d8f';
