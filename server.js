@@ -8,6 +8,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Content Security Policy middleware
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';");
+    next();
+});
+
 const accountSid = 'AC8b888b02f9970ef8bc905c406e1fdfbb';
 const authToken = '6f7bfea1c63513f7fe0a776a70f880dd';
 const client = twilio(accountSid, authToken);
