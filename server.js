@@ -13,12 +13,12 @@ app.use(express.static('.'));
 
 // Content Security Policy middleware
 app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';");
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';");
     next();
 });
 
 const accountSid = 'AC8b888b02f9970ef8bc905c406e1fdfbb';
-const authToken = '6f7bfea1c63513f7fe0a776a70f880dd';
+const authToken = '73f5ca78596169fa2e9541cac8246d8f';
 const client = twilio(accountSid, authToken);
 
 app.post('/send-sms', (req, res) => {
