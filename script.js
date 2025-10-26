@@ -46,26 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Test SMS button
-    document.getElementById('test-sms-btn').addEventListener('click', () => {
-        const status = document.getElementById('sms-status');
-        status.textContent = 'Enviando SMS...';
-        fetch('http://localhost:3000/send-sms', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                to: '+56941656899',
-                message: 'Prueba de SMS desde DENCO STORE'
-            })
-        })
-        .then(response => response.text())
-        .then(data => {
-            status.textContent = 'SMS enviado: ' + data;
-        })
-        .catch(error => {
-            status.textContent = 'Error: ' + error.message;
-        });
-    });
+
 });
